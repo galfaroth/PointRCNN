@@ -215,7 +215,7 @@ class KittiRCNNDataset(KittiDataset):
             range_flag = (pts_x >= x_range[0]) & (pts_x <= x_range[1]) \
                          & (pts_y >= y_range[0]) & (pts_y <= y_range[1]) \
                          & (pts_z >= z_range[0]) & (pts_z <= z_range[1])
-            pts_valid_flag = pts_valid_flag & range_flag
+            pts_valid_flag = range_flag
         return pts_valid_flag
 
     def __len__(self):
@@ -296,7 +296,7 @@ class KittiRCNNDataset(KittiDataset):
             else:
                 choice = np.arange(0, len(pts_rect), dtype=np.int32)
                 if self.npoints > len(pts_rect):
-                    extra_choice = np.random.choice(choice, self.npoints - len(pts_rect), replace=False)
+                    extra_choice = np.random.choice(choice, self.npoints - len(pts_rect), replace=True)
                     choice = np.concatenate((choice, extra_choice), axis=0)
                 np.random.shuffle(choice)
 

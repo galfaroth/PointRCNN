@@ -58,7 +58,14 @@ def rotate_pc_along_y_torch(pc, rot_angle):
 
     pc_temp = pc[:, :, [0, 2]]  # (N, 512, 2)
 
-    pc[:, :, [0, 2]] = torch.matmul(pc_temp, R.permute(0, 2, 1))  # (N, 512, 2)
+    R = R.permute(0,2,1)
+    R = R.cpu().numpy()
+    pc = pc.cpu().numpy()
+    pc_temp = pc_temp.cpu().numpy()
+    pc[:, :, [0, 2]] = np.matmul(pc_temp, R)
+    pc = torch.from_numpy(pc).cuda()
+
+    #pc[:, :, [0, 2]] = torch.matmul(pc_temp, R.permute(0, 2, 1))  # (N, 512, 2)
 
     return pc
 

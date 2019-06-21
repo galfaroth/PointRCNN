@@ -90,7 +90,7 @@ class ProposalLayer(nn.Module):
                 cur_scores = cur_scores[:pre_top_n_list[i]]
                 cur_proposals = cur_proposals[:pre_top_n_list[i]]
             else:
-                assert i == 2, '%d' % i
+                #assert i == 2, '%d' % i
                 # this area doesn't have any points, so use rois of first area
                 cur_scores = scores_ordered[first_mask]
                 cur_proposals = proposals_ordered[first_mask]

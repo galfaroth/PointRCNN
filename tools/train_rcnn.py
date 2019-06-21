@@ -26,7 +26,7 @@ parser.add_argument("--batch_size", type=int, default=16, required=True, help="b
 parser.add_argument("--epochs", type=int, default=200, required=True, help="Number of epochs to train for")
 
 parser.add_argument('--workers', type=int, default=8, help='number of workers for dataloader')
-parser.add_argument("--ckpt_save_interval", type=int, default=5, help="number of training epochs")
+parser.add_argument("--ckpt_save_interval", type=int, default=1, help="number of training epochs")
 parser.add_argument('--output_dir', type=str, default=None, help='specify an output directory if needed')
 parser.add_argument('--mgpus', action='store_true', default=False, help='whether to use multiple gpu')
 
@@ -59,7 +59,7 @@ def create_logger(log_file):
 
 
 def create_dataloader(logger):
-    DATA_PATH = os.path.join('../', 'data')
+    DATA_PATH = '../data/'
 
     # create dataloader
     train_set = KittiRCNNDataset(root_dir=DATA_PATH, npoints=cfg.RPN.NUM_POINTS, split=cfg.TRAIN.SPLIT, mode='TRAIN',
@@ -188,7 +188,7 @@ if __name__ == "__main__":
     os.system('cp ../lib/datasets/kitti_rcnn_dataset.py %s/' % backup_dir)
 
     # tensorboard log
-    tb_log = SummaryWriter(log_dir=os.path.join(root_result_dir, 'tensorboard'))
+    tb_log = SummaryWriter(logdir=os.path.join(root_result_dir, 'tensorboard'))
 
     # create dataloader & network & optimizer
     train_loader, test_loader = create_dataloader(logger)

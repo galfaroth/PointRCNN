@@ -41,8 +41,8 @@ class GTDatabaseGenerator(KittiDataset):
         for obj in obj_list:
             if obj.cls_type not in self.classes:
                 continue
-            if obj.level_str not in ['Easy', 'Moderate', 'Hard']:
-                continue
+            # if obj.level_str not in ['Easy', 'Moderate', 'Hard']:
+            #     continue
             valid_obj_list.append(obj)
 
         return valid_obj_list

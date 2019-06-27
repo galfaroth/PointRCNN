@@ -3,19 +3,19 @@ CLASSES: Car
 INCLUDE_SIMILAR_TYPE: True
 
 # config of augmentation
-AUG_DATA: True
-AUG_METHOD_LIST: ['rotation', 'scaling', 'flip']
+AUG_DATA: False
+AUG_METHOD_LIST: ['rotation2', 'scaling2', 'flip2']
 AUG_METHOD_PROB: [1.0, 1.0, 0.5]
 AUG_ROT_RANGE: 18
 
-GT_AUG_ENABLED: True
+GT_AUG_ENABLED: False
 GT_EXTRA_NUM: 15
 GT_AUG_RAND_NUM: True
-GT_AUG_APPLY_PROB: 1.0
+GT_AUG_APPLY_PROB: 0.0
 GT_AUG_HARD_RATIO: 0.6
 
 PC_REDUCE_BY_RANGE: True
-PC_AREA_SCOPE: [[-400, 400], [-30,   30], [-70, 70.4]]  # x, y, z scope in rect camera coords
+PC_AREA_SCOPE: [[-40, 40], [-1,   3], [0, 70.4]]  # x, y, z scope in rect camera coords
 CLS_MEAN_SIZE: [[1.52563191462, 1.62856739989, 3.88311640418]]
 
 
@@ -122,16 +122,16 @@ RCNN:
     HARD_BG_RATIO: 0.8
 
     # config of testing
-    SCORE_THRESH: 0.0003
-    NMS_THRESH: 0.001
+    SCORE_THRESH: 0.3
+    NMS_THRESH: 0.1
 
 # general training config
 TRAIN:
     SPLIT: train
     VAL_SPLIT: smallval
 
-    LR: 0.0001
-    LR_CLIP: 0.0002
+    LR: 0.002
+    LR_CLIP: 0.00001
     LR_DECAY: 0.5
     DECAY_STEP_LIST: [100, 150, 180, 200]
     LR_WARMUP: True
@@ -155,7 +155,7 @@ TRAIN:
 
     RPN_PRE_NMS_TOP_N: 9000
     RPN_POST_NMS_TOP_N: 512
-    RPN_NMS_THRESH: 0.85
+    RPN_NMS_THRESH: 0.75
     RPN_DISTANCE_BASED_PROPOSE: False
 
 TEST:

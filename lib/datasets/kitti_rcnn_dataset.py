@@ -215,7 +215,7 @@ class KittiRCNNDataset(KittiDataset):
             range_flag = (pts_x >= x_range[0]) & (pts_x <= x_range[1]) \
                          & (pts_y >= y_range[0]) & (pts_y <= y_range[1]) \
                          & (pts_z >= z_range[0]) & (pts_z <= z_range[1])
-            pts_valid_flag = range_flag
+            pts_valid_flag = pts_valid_flag & range_flag
         return pts_valid_flag
 
     def __len__(self):
@@ -267,8 +267,8 @@ class KittiRCNNDataset(KittiDataset):
         pts_img, pts_rect_depth = calib.rect_to_img(pts_rect)
         pts_valid_flag = self.get_valid_flag(pts_rect, pts_img, pts_rect_depth, img_shape)
 
-        pts_rect = pts_rect[pts_valid_flag][:, 0:3]
-        pts_intensity = pts_intensity[pts_valid_flag]
+        # pts_rect = pts_rect[pts_valid_flag][:, 0:3]
+        # pts_intensity = pts_intensity[pts_valid_flag]
 
         if cfg.GT_AUG_ENABLED and self.mode == 'TRAIN':
             # all labels for checking overlapping

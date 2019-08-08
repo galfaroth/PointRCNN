@@ -252,10 +252,11 @@ def eval_one_epoch_joint(model, dataloader, epoch_id, result_dir, logger):
 
             # NMS thresh
             # rotated nms
+            # taking the normalized scores rather than the raw_scores for better visualization of the scoring metric
             boxes_bev_selected = kitti_utils.boxes3d_to_bev_torch(pred_boxes3d_selected)
             keep_idx = iou3d_utils.nms_gpu(boxes_bev_selected, raw_scores_selected, cfg.RCNN.NMS_THRESH).view(-1)
             pred_boxes3d_selected = pred_boxes3d_selected[keep_idx]
-            scores_selected = raw_scores_selected[keep_idx]
+            scores_selected = norm_scores_selected[keep_idx]
             pred_boxes3d_selected, scores_selected = pred_boxes3d_selected.cpu().numpy(), scores_selected.cpu().numpy()
 
             cur_sample_id = sample_id[k]

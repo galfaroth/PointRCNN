@@ -403,6 +403,7 @@ def eval_single_ckpt(root_result_dir):
         except Exception as e:
             print("No Poincloud found. Waiting for the next frame.")
             print("Chill time: Sleeping for 2 sec while waiting")
+            print(e)
             time.sleep(2) 
 
 
